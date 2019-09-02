@@ -1,33 +1,29 @@
 import React, {useState} from 'react'
-
-import {List, ListItem, ListItemText, ListItemIcon, Collapse} from '@material-ui/core'
-import InboxIcon from '@material-ui/icons/Inbox'
-import {ExpandMore, ExpandLess} from '@material-ui/icons'
+import FormControl from '@material-ui/core/FormControl';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import {Container} from '@material-ui/core';
 
 export default function MyList() {
-  const [open, setOpen] = useState(false)
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
-  return <div>
-    <List>
-      <ListItem button onClick={() => setOpen(!open)}>
-        <ListItemIcon>
-          <InboxIcon/>
-        </ListItemIcon>
-        <ListItemText primary='Hello'/>
-        {
-          open ? <ExpandLess/> : <ExpandMore/>
-        }
-      </ListItem>
-      <Collapse in={open}>
-        <List>
-          <ListItem>
-            <ListItemText primary='typescript'/>
-          </ListItem>
-          <ListItem>
-            <ListItemText primary='material-ui'/>
-          </ListItem>
-        </List>
-      </Collapse>
-    </List>
-  </div>
+  function login() {
+    alert(JSON.stringify({username, password}, null, 4));
+  }
+
+  return <Container maxWidth='xs'>
+    <form>
+      <FormControl fullWidth>
+        <TextField label='Username' value={username} onChange={event => setUsername(event.target.value)}/>
+      </FormControl>
+      <FormControl fullWidth>
+        <TextField label='Password' type='password' value={password}
+                   onChange={event => setPassword(event.target.value)}/>
+      </FormControl>
+      <FormControl fullWidth>
+        <Button onClick={login}>Login</Button>
+      </FormControl>
+    </form>
+  </Container>
 }
